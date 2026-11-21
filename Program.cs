@@ -1,108 +1,164 @@
 ﻿using System;
+using System.Text;
 
-namespace Assignment02
+namespace Assignment03
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             #region Q01
-            Book b = new Book();
-            b.Title = "Utopia";
-            b.Pages = 200;
-
-            object obj = b;
-            Console.WriteLine(obj);
+            string title = "clean code";
+            string upperTitle = title.ToUpper();
+            Console.WriteLine(title);
+            Console.WriteLine(upperTitle);
             #endregion
 
             #region Q02
-            Book b2 = new Book() { Title = "Utopia", Pages = 200 };
-            Console.WriteLine(b2.ToString());
-            Console.WriteLine(b2.Equals(b2));
-            Console.WriteLine(b2.GetHashCode());
-            Console.WriteLine(b2.GetType());
+            string s1 = "Clean Code";
+            string s2 = "Clean Code";
+            Console.WriteLine(object.ReferenceEquals(s1, s2));
             #endregion
 
             #region Q03
-            // Compile-time error
-            int pages = 464;
-            Console.WriteLine(pages);
+            StringBuilder sb = new StringBuilder();
+            sb.Append("Book List");
+            sb.Append(" - Updated");
+            Console.WriteLine(sb);
             #endregion
 
             #region Q04
-            try
-            {
-                int x = 10;
-                int y = 0;
-                int res = x / y;
-                Console.WriteLine(res);
-            }
-            catch (DivideByZeroException ex)
-            {
-                Console.WriteLine("Cannot divide by zero");
-            }
-            finally
-            {
-                Console.WriteLine("Done");
-            }
+            sb.Replace("Book List", "Library");
+            Console.WriteLine(sb);
             #endregion
 
             #region Q05
-            int pages5 = 300;
-            double d = pages5;
-            Console.WriteLine(d);
+            string title5 = "Clean Code";
+            int pages5 = 464;
+            string res1 = "Book: " + title5 + ", Pages: " + pages5;
+            Console.WriteLine(res1);
             #endregion
 
             #region Q06
-            double price = 49.99;
-            int intPrice = (int)price;
-            Console.WriteLine(intPrice);
+            string res2 = $"Book: {title5}, Pages: {pages5}";
+            Console.WriteLine(res2);
             #endregion
 
             #region Q07
-            string pagesText = "464";
-            int p = Convert.ToInt32(pagesText);
-            Console.WriteLine(p);
+            string res3 = string.Format("Book: {0}, Pages: {1}", title5, pages5);
+            Console.WriteLine(res3);
             #endregion
 
             #region Q08
-            string yearText = "2023";
-            int year = int.Parse(yearText);
-            Console.WriteLine(year);
-
-            string badText = "abc";
-            bool result = int.TryParse(badText, out int num);
-            if (result)
+            int pages8 = 464;
+            if (pages8 > 300)
             {
-                Console.WriteLine(num);
+                Console.WriteLine("Long Book");
             }
             else
             {
-                Console.WriteLine("Invalid number");
+                Console.WriteLine("Short Book");
             }
             #endregion
 
             #region Q09
             int pages9 = 464;
-            string s = pages9.ToString();
-            Console.WriteLine(s);
-            Console.WriteLine(s.GetType());
+            bool isAvailable = true;
+            if (pages9 > 300 && isAvailable)
+            {
+                Console.WriteLine("You can borrow this book");
+            }
             #endregion
 
             #region Q10
-            int copies = 100;
-            object o = copies;
-            int newCopies = (int)o;
+            string title10 = "Refactoring";
+            switch (title10)
+            {
+                case "Clean Code":
+                    Console.WriteLine("Great choice!");
+                    break;
+                case "Refactoring":
+                    Console.WriteLine("Nice pick!");
+                    break;
+                default:
+                    Console.WriteLine("Never heard of it");
+                    break;
+            }
+            #endregion
 
-            Console.WriteLine(o);
-            Console.WriteLine(newCopies);
+            #region Q11
+            int pages11 = 464;
+            string sizeLabel = pages11 > 300 ? "Long Book" : "Short Book";
+            Console.WriteLine(sizeLabel);
+            #endregion
+
+            #region Q12
+            string[] books = { "Clean Code", "The Pragmatic Programmer", "Refactoring" };
+            for (int i = 0; i < books.Length; i++)
+            {
+                Console.WriteLine($"{i + 1}. {books[i]}");
+            }
+            #endregion
+
+            #region Q13
+            int index = 0;
+            while (index < books.Length)
+            {
+                Console.WriteLine(books[index]);
+                index++;
+            }
+            #endregion
+
+            #region Q14
+            int count = 0;
+            do
+            {
+                Console.WriteLine("Checking book...");
+                count++;
+            } while (count < 3);
+            #endregion
+
+            #region Q15
+            foreach (string book in books)
+            {
+                Console.WriteLine(book);
+            }
+            #endregion
+
+            #region Q16
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (books[i] == "Refactoring")
+                {
+                    break;
+                }
+                Console.WriteLine(books[i]);
+            }
+            #endregion
+
+            #region Q17
+            for (int i = 0; i < books.Length; i++)
+            {
+                if (books[i] == "The Pragmatic Programmer")
+                {
+                    continue;
+                }
+                Console.WriteLine(books[i]);
+            }
+            #endregion
+
+            #region Q18
+            PrintFirstBook(books);
             #endregion
         }
-    }
 
-    internal class Book
-    {
-        public string Title { get; set; }
-        public int Pages { get; set; }
+        static void PrintFirstBook(string[] books)
+        {
+            if (books.Length == 0)
+            {
+                return;
+            }
+            Console.WriteLine(books[0]);
+        }
     }
 }
